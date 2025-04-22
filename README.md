@@ -36,10 +36,10 @@ TRAIN_FLAGS="--lr 1e-4 --batch_size 128"
 
 Here are some changes we experiment with, and how to set them in the flags:
 
- * **Learned sigmas:** add `--learn_sigma True` to `MODEL_FLAGS`
- * **Cosine schedule:** change `--noise_schedule linear` to `--noise_schedule cosine`
- * **Importance-sampled VLB:** add `--use_kl True` to `DIFFUSION_FLAGS` and add `--schedule_sampler loss-second-moment` to  `TRAIN_FLAGS`.
- * **Class-conditional:** add `--class_cond True` to `MODEL_FLAGS`.
+- **Learned sigmas:** add `--learn_sigma True` to `MODEL_FLAGS`
+- **Cosine schedule:** change `--noise_schedule linear` to `--noise_schedule cosine`
+- **Importance-sampled VLB:** add `--use_kl True` to `DIFFUSION_FLAGS` and add `--schedule_sampler loss-second-moment` to `TRAIN_FLAGS`.
+- **Class-conditional:** add `--class_cond True` to `MODEL_FLAGS`.
 
 Once you have setup your hyper-parameters, you can run an experiment like so:
 

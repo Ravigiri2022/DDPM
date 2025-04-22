@@ -1,6 +1,6 @@
 from PIL import Image
 import blobfile as bf
-from mpi4py import MPI
+# from mpi4py import MPI
 import numpy as np
 from torch.utils.data import DataLoader, Dataset
 
@@ -38,8 +38,8 @@ def load_data(
         image_size,
         all_files,
         classes=classes,
-        shard=MPI.COMM_WORLD.Get_rank(),
-        num_shards=MPI.COMM_WORLD.Get_size(),
+        shard=0,
+        num_shards=1,
     )
     if deterministic:
         loader = DataLoader(
@@ -81,9 +81,6 @@ class ImageDataset(Dataset):
             pil_image = Image.open(f)
             pil_image.load()
 
-        # We are not on a new enough PIL to support the `reducing_gap`
-        # argument, which uses BOX downsampling at powers of two first.
-        # Thus, we do it by hand to improve downsample quality.
         while min(*pil_image.size) >= 2 * self.resolution:
             pil_image = pil_image.resize(
                 tuple(x // 2 for x in pil_image.size), resample=Image.BOX
